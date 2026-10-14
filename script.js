@@ -79,13 +79,9 @@
   addEventListener('resize', onScroll);
   onScroll();
 
-  // ---------- carrosséis do celular (bolinhas + etapa ativa) ----------
+  // ---------- carrosséis do celular: bolinhas de posição ----------
   [
-    ['.value__grid', '.vcard'],
     ['.bento', '.scard'],
-    ['.steps', '.step'],
-    ['.masonry', '.mcard'],
-    ['.prices', '.price'],
     ['.demo__grid', '.clip'],
   ].forEach(([boxSel, itemSel]) => {
     const box = document.querySelector(boxSel);
@@ -109,7 +105,6 @@
       if (!isCarousel(box)) return;
       const i = current();
       btns.forEach((b, k) => b.classList.toggle('on', k === i));
-      if (box === stepsBox) steps.forEach((s, k) => s.classList.toggle('is-active', k === i));
     };
     box.addEventListener('scroll', () => { if (!raf) raf = requestAnimationFrame(update); }, { passive: true });
     addEventListener('resize', update);
