@@ -28,7 +28,6 @@
     }
     io.observe(el);
   });
-  document.querySelectorAll('.brandband').forEach(el => io.observe(el));
 
   // card do showreel: levanta e vem para frente quando entra na tela (uma vez)
   const reelCard = document.querySelector('.reel-card');

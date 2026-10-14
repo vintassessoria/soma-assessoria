@@ -128,7 +128,13 @@ button { cursor: pointer; background: none; border: 0; padding: 0; }
 .hero__bg video { width: 100%; height: 100%; object-fit: cover; filter: grayscale(1) contrast(1.15) brightness(.78); transform: scale(1.04); }
 .hero__bg::after { content: ""; position: absolute; inset: 0; background: radial-gradient(70% 60% at 50% 45%, rgba(0, 0, 0, .28), transparent 70%), linear-gradient(180deg, rgba(0, 0, 0, .25) 0%, transparent 30%, transparent 66%, rgba(196, 196, 196, .9) 86%, #c4c4c4 92%); }
 .hero__content { position: relative; display: flex; flex-direction: column; align-items: center; max-width: 980px; }
-.hero__title { margin: 0; font-size: clamp(42px, 6vw, 88px); font-weight: 600; line-height: 1.08; letter-spacing: -.035em; background: var(--iris); -webkit-background-clip: text; background-clip: text; color: transparent; filter: drop-shadow(0 4px 30px rgba(0, 0, 0, .25)); padding-bottom: .06em; }
+/* título translúcido: verde da SOMA com o vídeo aparecendo por dentro das letras (hard-light) */
+.hero__title {
+  margin: 0; padding-bottom: .06em; font-size: clamp(42px, 6vw, 88px); font-weight: 700; line-height: 1.08; letter-spacing: -.035em; color: transparent;
+  background: linear-gradient(100deg, #8dff4a 0%, #6bf019 30%, #86ff3d 55%, #6bf019 75%, #3be0a0 100%);
+  -webkit-background-clip: text; background-clip: text;
+  mix-blend-mode: hard-light;
+}
 .hero__title span { display: block; text-wrap: balance; }
 .hero__sub { margin-top: 28px; font-size: clamp(17px, 1.35vw, 20px); line-height: 1.55; letter-spacing: 0; max-width: 44ch; color: rgba(255, 255, 255, .92); text-shadow: 0 1px 12px rgba(0, 0, 0, .3); text-wrap: balance; }
 .hero__ctas { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 48px; }
@@ -272,24 +278,6 @@ button { cursor: pointer; background: none; border: 0; padding: 0; }
 .demo__ctas { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 48px; }
 .btn--light { padding: 0 22px; background: var(--soft); color: var(--ink); gap: 8px; box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .05); }
 .btn--light:hover { background: var(--soft-2); transform: translateY(-2px); }
-
-/* ---------- letreiro translúcido: verde da SOMA com a textura da foto aparecendo por dentro ---------- */
-.wordmark {
-  margin: 0; font-weight: 800; line-height: .8; letter-spacing: -.03em; text-align: center; color: transparent; user-select: none; pointer-events: none;
-  background:
-    radial-gradient(34% 70% at 8% 100%, #2b6fc0 0%, transparent 70%),
-    linear-gradient(100deg, #6bf019 0%, #86ff3d 38%, #6bf019 60%, #1fae7a 82%, #2b6fc0 100%);
-  -webkit-background-clip: text; background-clip: text;
-  mix-blend-mode: hard-light;
-}
-.brandband { position: relative; isolation: isolate; height: clamp(240px, 30vw, 440px); overflow: hidden; background: #0d0d0d; }
-.brandband__photos { position: absolute; inset: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 3px; }
-.brandband__photos img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 22%; filter: grayscale(1) contrast(1.12) brightness(.7); transform: scale(1.06); transition: transform 1.6s var(--ease); }
-.brandband.in .brandband__photos img { transform: none; }
-.brandband__word { position: absolute; inset: 0; display: grid; place-items: center; padding-top: .08em; font-size: clamp(104px, 28vw, 440px); }
-.js .brandband__word { opacity: 0; transform: translateY(14%); transition: opacity 1s var(--ease), transform 1.2s var(--ease); }
-.js .brandband.in .brandband__word { opacity: 1; transform: none; }
-.footer__word { position: relative; margin: clamp(24px, 4vw, 56px) calc(var(--pad) * -1) -.14em; font-size: clamp(110px, 25.5vw, 420px); line-height: .76; }
 
 /* ---------- 006 marcas ---------- */
 .brands { padding: var(--section) 0; overflow: hidden; }
@@ -537,6 +525,5 @@ button { cursor: pointer; background: none; border: 0; padding: 0; }
   *, *::before, *::after { animation: none !important; transition: none !important; }
   .js .up { opacity: 1; transform: none; filter: none; }
   .js .reel-card { transform: none; filter: none; opacity: 1; }
-  .js .brandband__word, .brandband__photos img { transform: none; opacity: 1; }
   .about__title .w { color: var(--ink); }
 }
