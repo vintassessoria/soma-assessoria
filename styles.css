@@ -167,7 +167,7 @@ button { cursor: pointer; background: none; border: 0; padding: 0; }
 .reel-card { position: relative; z-index: 1; width: min(640px, 84vw); aspect-ratio: 16 / 9.4; border-radius: clamp(44px, 7.2vw, 104px); overflow: hidden; transform-origin: 50% 50%; box-shadow: 0 40px 80px -36px rgba(0, 0, 0, .35); }
 /* bordas "derretendo" no fundo: brilho branco interno, como no template */
 .reel-card::after { content: ""; position: absolute; inset: 0; border-radius: inherit; box-shadow: inset 0 0 40px 0 #fff; pointer-events: none; }
-.reel-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s var(--ease); }
+.reel-card img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 38%; transition: transform 1.2s var(--ease); }
 /* entrada: o card começa deitado e desfocado, levanta e vem para frente com efeito de mola */
 .js .reel-card { transform: perspective(1200px) rotateX(60deg) scale(.8); filter: blur(8px); opacity: .8; }
 .js .reel-card.is-up { animation: stand-up 1.6s forwards; }
@@ -306,7 +306,7 @@ button { cursor: pointer; background: none; border: 0; padding: 0; }
 .masonry__col:nth-child(3) > :nth-child(2) { grid-area: soma; }
 .mcard { position: relative; display: block; width: 100%; border-radius: 40px; overflow: hidden; background: var(--soft); text-align: left; }
 .mcard--video { min-height: 560px; color: #fff; }
-.mcard--video > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s var(--ease); }
+.mcard--video > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 6%; transition: transform 1.2s var(--ease); }
 .mcard--video:hover > img { transform: scale(1.05); }
 .mcard--video::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 45%, rgba(0, 0, 0, .75)); }
 .mcard__play { left: 64px; top: 64px; width: 52px; height: 52px; font-size: 18px; z-index: 1; }
