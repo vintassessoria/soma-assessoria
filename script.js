@@ -197,4 +197,6 @@
   }));
 
   document.getElementById('year').textContent = new Date().getFullYear();
+  // anos de mercado contados a partir da fundação, atualiza sozinho
+  document.querySelectorAll('[data-since]').forEach(el => { el.textContent = new Date().getFullYear() - Number(el.dataset.since); });
 })();

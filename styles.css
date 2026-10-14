@@ -166,10 +166,11 @@ button { cursor: pointer; background: none; border: 0; padding: 0; }
 .about__title .w { color: rgba(26, 26, 26, .18); transition: color .3s; }
 .about__title .w.on { color: var(--ink); }
 .about__stage { position: relative; margin-top: clamp(56px, 7vw, 96px); display: grid; place-items: center; }
-.stats { position: absolute; inset: 50% 0 auto; transform: translateY(-50%); overflow: hidden; }
-.stats__track { --gap: 80px; display: flex; gap: var(--gap); width: max-content; animation: slide 40s linear infinite; }
-.stats span { font-size: clamp(56px, 8vw, 120px); font-weight: 600; letter-spacing: -.07em; line-height: 1; color: #b7b7b7; text-transform: uppercase; white-space: nowrap; }
-.stats b { color: var(--ink); font-weight: 600; }
+/* números da SOMA: linha fixa abaixo do vídeo, legível de ponta a ponta */
+.stats { display: grid; grid-template-columns: repeat(4, 1fr); max-width: calc(var(--narrow) + var(--pad) * 2); margin: clamp(48px, 6vw, 80px) auto 0; padding: 0 var(--pad); list-style: none; }
+.stats li { display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 6px 12px; font-size: 15px; color: var(--ink-2); text-align: center; }
+.stats li + li { border-left: 1px solid var(--soft-2); }
+.stats b { font-size: clamp(40px, 4.4vw, 64px); font-weight: 700; line-height: 1; letter-spacing: -.04em; color: var(--ink); }
 .reel-card { position: relative; z-index: 1; width: min(640px, 84vw); aspect-ratio: 16 / 9.4; border-radius: clamp(44px, 7.2vw, 104px); overflow: hidden; transform-origin: 50% 50%; box-shadow: 0 40px 80px -36px rgba(0, 0, 0, .35); }
 /* bordas "derretendo" no fundo: brilho branco interno, como no template */
 .reel-card::after { content: ""; position: absolute; inset: 0; border-radius: inherit; box-shadow: inset 0 0 40px 0 #fff; pointer-events: none; }
@@ -453,7 +454,9 @@ button { cursor: pointer; background: none; border: 0; padding: 0; }
   .about__sub { font-size: 17px; }
   .hero__ctas { flex-direction: column; align-items: stretch; width: 100%; max-width: 340px; }
   .hero__logos { --lk: .72px; }
-  .stats span { font-size: 56px; }
+  .stats { grid-template-columns: 1fr 1fr; row-gap: 28px; }
+  .stats li:nth-child(3) { border-left: 0; }
+  .stats b { font-size: 44px; }
   /* carrossel só onde ele ajuda: serviços (7 cards) e vídeos verticais; o resto vira lista compacta */
   .bento, .demo__grid {
     display: flex; gap: 12px; max-width: none; margin: 0 calc(var(--pad) * -1); padding: 4px var(--pad) 10px;
