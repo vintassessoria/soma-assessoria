@@ -1,0 +1,19 @@
+# Só o site vai para o repositório: index.html, styles.css, script.js, robots.txt, vercel.json
+
+# código compilado do template do Framer (terceiros, não versionar)
+aecf53a4-7b71-4001-8f8e-18754a80b3a5/
+
+# backup local e pasta de publicação via CLI
+versao-anterior/
+publicar/
+
+# configurações locais e credenciais
+.claude/
+.vercel/
+.env*
+*.bak*
+
+# sistema
+.DS_Store
+Thumbs.db
+desktop.ini
