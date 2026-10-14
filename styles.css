@@ -166,11 +166,14 @@ button { cursor: pointer; background: none; border: 0; padding: 0; }
 .about__title .w { color: rgba(26, 26, 26, .18); transition: color .3s; }
 .about__title .w.on { color: var(--ink); }
 .about__stage { position: relative; margin-top: clamp(56px, 7vw, 96px); display: grid; place-items: center; }
-/* números da SOMA: linha fixa abaixo do vídeo, legível de ponta a ponta */
-.stats { display: grid; grid-template-columns: repeat(4, 1fr); max-width: calc(var(--narrow) + var(--pad) * 2); margin: clamp(48px, 6vw, 80px) auto 0; padding: 0 var(--pad); list-style: none; }
-.stats li { display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 6px 12px; font-size: 15px; color: var(--ink-2); text-align: center; }
-.stats li + li { border-left: 1px solid var(--soft-2); }
-.stats b { font-size: clamp(40px, 4.4vw, 64px); font-weight: 700; line-height: 1; letter-spacing: -.04em; color: var(--ink); }
+/* números da SOMA: faixa de texto grande correndo abaixo do vídeo (pausa no hover) */
+.stats { margin-top: clamp(40px, 5vw, 72px); overflow: hidden; mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
+.stats__track { --gap: 0px; display: flex; width: max-content; animation: slide 60s linear infinite; }
+.stats:hover .stats__track { animation-play-state: paused; }
+.stats__group { display: flex; align-items: center; gap: clamp(28px, 4vw, 56px); padding-right: clamp(28px, 4vw, 56px); }
+.stats span { font-size: clamp(44px, 6vw, 96px); font-weight: 600; line-height: 1.1; letter-spacing: -.045em; color: #8a8a8a; white-space: nowrap; }
+.stats b { font-weight: 700; color: var(--ink); }
+.stats__mark { width: clamp(28px, 3vw, 44px); height: auto; flex-shrink: 0; }
 .reel-card { position: relative; z-index: 1; width: min(640px, 84vw); aspect-ratio: 16 / 9.4; border-radius: clamp(44px, 7.2vw, 104px); overflow: hidden; transform-origin: 50% 50%; box-shadow: 0 40px 80px -36px rgba(0, 0, 0, .35); }
 /* bordas "derretendo" no fundo: brilho branco interno, como no template */
 .reel-card::after { content: ""; position: absolute; inset: 0; border-radius: inherit; box-shadow: inset 0 0 40px 0 #fff; pointer-events: none; }
@@ -454,9 +457,7 @@ button { cursor: pointer; background: none; border: 0; padding: 0; }
   .about__sub { font-size: 17px; }
   .hero__ctas { flex-direction: column; align-items: stretch; width: 100%; max-width: 340px; }
   .hero__logos { --lk: .72px; }
-  .stats { grid-template-columns: 1fr 1fr; row-gap: 28px; }
-  .stats li:nth-child(3) { border-left: 0; }
-  .stats b { font-size: 44px; }
+  .stats span { font-size: 40px; }
   /* carrossel só onde ele ajuda: serviços (7 cards) e vídeos verticais; o resto vira lista compacta */
   .bento, .demo__grid {
     display: flex; gap: 12px; max-width: none; margin: 0 calc(var(--pad) * -1); padding: 4px var(--pad) 10px;
