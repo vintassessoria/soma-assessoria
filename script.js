@@ -55,10 +55,45 @@
   const stepsBox = document.querySelector('.steps');
   const isCarousel = el => el && el.scrollWidth > el.clientWidth + 4;
 
+  // ---------- desfoque no pé da tela: borda ondulada (máscaras em canvas) ----------
+  const bl = document.querySelector('.bl');
+  if (bl) {
+    const L = 480, A = 160, AMP = 0.12;
+    const wave = x => { const u = 2 * Math.PI * x / L; return Math.sin(u) * 0.6 + Math.sin(2 * u + 1.7) * 0.28 + Math.sin(3 * u + 0.4) * 0.12; };
+    const layers = [...bl.children];
+    const ok = layers.every((layer, n) => {
+      const cv = document.createElement('canvas');
+      cv.width = L; cv.height = A;
+      const cx = cv.getContext('2d');
+      if (!cx) return false;
+      const im = cx.createImageData(L, A), p = im.data;
+      const s0 = n * 0.0875, s1 = (n + 1) * 0.0875;
+      for (let x = 0; x < L; x++) {
+        const d = wave(x) * AMP;
+        for (let y = 0; y < A; y++) {
+          const t = Math.min(1, Math.max(0, (y / A - s0 - d) / (s1 - s0)));
+          const k = (y * L + x) * 4;
+          p[k] = p[k + 1] = p[k + 2] = 255; p[k + 3] = t * 255 | 0;
+        }
+      }
+      cx.putImageData(im, 0, 0);
+      const s = layer.style;
+      s.webkitMaskImage = s.maskImage = `url(${cv.toDataURL('image/png')})`;
+      s.webkitMaskSize = s.maskSize = `${L}px 100%`;
+      s.webkitMaskRepeat = s.maskRepeat = 'repeat-x';
+      s.animationDelay = `${-n * 1.6}s`; // cada camada num tempo, senão ondulam juntas
+      return true;
+    });
+    if (ok) bl.classList.add('onda');
+  }
+
   let ticking = false;
   const onScroll = () => {
     ticking = false;
     const vh = innerHeight;
+    // a faixa só aparece depois que a pessoa começa a rolar (no topo ela cairia
+    // sobre as logos do hero) e some perto do fim, para não desfocar o formulário
+    if (bl) bl.style.setProperty('--vis', scrollY < 120 || document.documentElement.scrollHeight - scrollY - vh < 180 ? '0' : '1');
     if (words.length && !reduce) {
       const r = reveal.getBoundingClientRect();
       const p = Math.min(1, Math.max(0, (vh * 0.85 - r.top) / (r.height + vh * 0.35)));

@@ -88,8 +88,25 @@ button { cursor: pointer; background: none; border: 0; padding: 0; }
 .callme span { width: 56px; height: 56px; margin-left: -10px; border-radius: 50%; display: grid; place-items: center; background: rgba(255, 255, 255, .75); font-size: 22px; backdrop-filter: blur(8px); }
 
 /* entrada */
-.js .up { opacity: 0; transform: translateY(28px); filter: blur(6px); transition: opacity .9s var(--ease), transform .9s var(--ease), filter .9s var(--ease); transition-delay: var(--d, 0s); }
+.js .up { opacity: 0; transform: translateY(28px); filter: blur(10px); transition: opacity .9s var(--ease), transform .9s var(--ease), filter .9s var(--ease); transition-delay: var(--d, 0s); }
 .js .up.in { opacity: 1; transform: none; filter: none; }
+
+/* desfoque no pé da tela, igual ao somacorps.com: oito camadas, cada uma borra
+   mais (20*(i/8)^2) e começa um pouco mais abaixo, então o foco se perde aos poucos.
+   A borda ondula (máscaras feitas no script.js); no celular ficam quatro camadas. */
+.bl { position: fixed; left: 0; right: 0; bottom: 0; height: 120px; z-index: 30; pointer-events: none; contain: strict; opacity: var(--vis, 1); transition: opacity .35s var(--ease); }
+.bl > i { position: absolute; inset: 0; display: block; }
+.bl > i:nth-child(1) { --b: .3px; --m: linear-gradient(transparent 0%, #000 8.75%); }
+.bl > i:nth-child(2) { --b: 1.3px; --m: linear-gradient(transparent 8.75%, #000 17.5%); }
+.bl > i:nth-child(3) { --b: 2.8px; --m: linear-gradient(transparent 17.5%, #000 26.25%); }
+.bl > i:nth-child(4) { --b: 5px; --m: linear-gradient(transparent 26.25%, #000 35%); }
+.bl > i:nth-child(5) { --b: 7.8px; --m: linear-gradient(transparent 35%, #000 43.75%); }
+.bl > i:nth-child(6) { --b: 11.3px; --m: linear-gradient(transparent 43.75%, #000 52.5%); }
+.bl > i:nth-child(7) { --b: 15.3px; --m: linear-gradient(transparent 52.5%, #000 61.25%); }
+.bl > i:nth-child(8) { --b: 20px; --m: linear-gradient(transparent 61.25%, #000 70%); }
+.bl > i { -webkit-backdrop-filter: blur(var(--b)) saturate(1.2); backdrop-filter: blur(var(--b)) saturate(1.2); -webkit-mask-image: var(--m); mask-image: var(--m); }
+.bl.onda > i { left: -480px; right: -480px; animation: bl-onda 18s linear infinite; }
+@keyframes bl-onda { to { transform: translateX(480px); } }
 
 /* ---------- nav ---------- */
 .nav { position: fixed; top: 16px; left: 50%; transform: translateX(-50%); z-index: 50; }
@@ -499,6 +516,10 @@ button { cursor: pointer; background: none; border: 0; padding: 0; }
   .demo__grid { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 767px) {
+  .js .up { filter: blur(6px); }
+  .bl { height: 92px; }
+  .bl > i:nth-child(odd) { display: none; }
+  .bl.onda > i { animation-duration: 26s; }
   .nav { top: 12px; }
   .nav__logo { width: 48px; height: 48px; }
   .nav__menu { padding: 0 12px; font-size: 14px; }
